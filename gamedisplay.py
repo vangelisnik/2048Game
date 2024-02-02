@@ -38,11 +38,11 @@ class Display(Frame):
         self.master.title('2048')
         self.master.bind("<Key>", self.key_press)
 
-        self.commands = {UP_KEY: game_functions.move_up, 
-                         DOWN_KEY: game_functions.move_down,
-                         LEFT_KEY: game_functions.move_left, 
-                         RIGHT_KEY: game_functions.move_right,
-                         AI_KEY: game_ai.ai_move,
+        self.commands = {UP_KEY: gamefunctions.move_up, 
+                         DOWN_KEY: gamefunctions.move_down,
+                         LEFT_KEY: gamefunctions.move_left, 
+                         RIGHT_KEY: gamefunctions.move_right,
+                         AI_KEY: game.ai_move,
                          }
         
         self.grid_cells = []
@@ -74,7 +74,7 @@ class Display(Frame):
             self.grid_cells.append(grid_row)
 
     def init_matrix(self):
-        self.matrix = game_functions.initialize_game()
+        self.matrix = gamefunctions.initialize_game()
 
     def draw_grid_cells(self):
         for row in range(CELL_COUNT):
@@ -95,22 +95,22 @@ class Display(Frame):
         if key == AI_PLAY_KEY:
             move_count = 0
             while valid_game:
-                self.matrix, valid_game = game_ai.ai_move(self.matrix,40, 30)
+                self.matrix, valid_game = game.ai_move(self.matrix,40, 30)
                 if valid_game:
-                    self.matrix = game_functions.add_new_tile(self.matrix)
+                    self.matrix = gamefunctions.add_new_tile(self.matrix)
                     self.draw_grid_cells()
                 move_count += 1
         if key == AI_KEY:
-            self.matrix, move_made = game_ai.ai_move(self.matrix, 20, 30)
+            self.matrix, move_made = game.ai_move(self.matrix, 20, 30)
             if move_made:
-                self.matrix = game_functions.add_new_tile(self.matrix)
+                self.matrix = gamefunctions.add_new_tile(self.matrix)
                 self.draw_grid_cells()
                 move_made = False
 
         elif key in self.commands:
             self.matrix, move_made, _ = self.commands[repr(event.char)](self.matrix)
             if move_made:
-                self.matrix = game_functions.add_new_tile(self.matrix)
+                self.matrix = gamefunctions.add_new_tile(self.matrix)
                 self.draw_grid_cells()
                 move_made = False
 gamegrid = Display()
