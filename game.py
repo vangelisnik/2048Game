@@ -8,7 +8,7 @@ SPM_SCALE_PARAM = 10
 SL_SCALE_PARAM = 4
 SEARCH_PARAM = 200
 
-from game_functions import initialize_game, random_move,\
+from gamefunctions import initialize_game, random_move,\
                             move_down, move_left,\
                             move_right, move_up,\
                             check_for_win, add_new_tile
